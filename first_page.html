@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MLSAC - VS Code Inspired</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e3f;
+    color: #d0dbf9;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+  header {
+    height: 40px;
+    background: linear-gradient(90deg, #002e72, #005ab5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 2px solid #003a99;
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+  }
+  .header-logo {
+    height: 34px;
+    width: auto;
+  }
+  .header-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #e6f0ff;
+    letter-spacing: 0.5px;
+    text-align: center;
+    flex: 1;
+  }
+  .container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+  nav.sidebar {
+    width: 280px;
+    background: #002a68;
+    border-right: 1.5px solid #0057b7;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 10px;
+    color: #bbd0ff;
+  }
+  nav.sidebar h2 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    color: #c2d2ff;
+  }
+  nav.sidebar ul { list-style: none; flex: 1; }
+  nav.sidebar ul li {
+    padding: 12px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #aac2f8;
+    margin-bottom: 6px;
+    transition: background-color 0.3s ease;
+  }
+  nav.sidebar ul li:hover, nav.sidebar ul li.active {
+    background-color: #1045a1;
+    color: #e1e7ff;
+  }
+  .main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e3f;
+    overflow: hidden;
+  }
+  .nav-bar {
+    height: 40px;
+    background: #002e72;
+    border-bottom: 1.5px solid #0057b7;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    box-shadow: inset 0 -2px 2px -2px rgba(0,0,0,0.5);
+  }
+  .nav-bar .tab {
+    padding: 6px 17px;
+    margin-right: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    color: #cadafc;
+    background: #1e1e3f;
+    transition: background-color 0.25s ease;
+  }
+  .nav-bar .tab.active {
+    color: #ffffff;
+    background: #0057b7;
+    box-shadow: 0 2px 7px -2px #003769;
+  }
+  .nav-bar .tab:hover:not(.active) {
+    background-color: #3a528a;
+  }
+  main.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 35px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #dde4ff;
+    background: #262c56;
+  }
+  main.content h1 { margin-bottom: 15px; font-size: 28px; text-align: center;}
+  .welcome-logo-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .welcome-logo {
+    height: 110px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  main.content p { margin-bottom: 16px; text-align: center;}
+  main.content ul { margin-left: 30px; }
+  footer {
+    height: 28px;
+    background: linear-gradient(90deg, #003a99, #0070d1);
+    color: #c2d3ff;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,0.75);
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-content">
+    <img src="https://mlsacbvp.vercel.app/aboutus/aboutus_assets/MLSCLogo.png" alt="MLSAC Logo" class="header-logo">
+    <span class="header-title">MLSAC - Microsoft Learn Student Ambassadors</span>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="sidebar">
+    <h2>EXPLORER</h2>
+    <ul>
+      <li class="active" onclick="switchTab('welcome')">Welcome</li>
+      <li onclick="switchTab('about')">About Us</li>
+      <li onclick="switchTab('team')">Team</li>
+      <li onclick="switchTab('events')">Events</li>
+      <li onclick="switchTab('contact')">Contact</li>
+    </ul>
+  </nav>
+
+  <div class="main-area">
+    <div class="nav-bar">
+      <div id="tab-welcome" class="tab active" onclick="switchTab('welcome')">Welcome</div>
+      <div id="tab-about" class="tab" onclick="switchTab('about')">About Us</div>
+      <div id="tab-team" class="tab" onclick="switchTab('team')">Team</div>
+      <div id="tab-events" class="tab" onclick="switchTab('events')">Events</div>
+      <div id="tab-contact" class="tab" onclick="switchTab('contact')">Contact</div>
+    </div>
+    <main class="content" id="content-area">
+      <div class="welcome-logo-box">
+        <img src="https://mlsacbvp.vercel.app/aboutus/aboutus_assets/MLSCLogo.png" alt="MLSAC Logo" class="welcome-logo">
+      </div>
+      <h1>Welcome to MLSAC Society</h1>
+      <p>The Microsoft Learn Student Ambassadors' Chapter (MLSAC) is a vibrant community of tech enthusiasts dedicated to organizing sessions, workshops, and hackathons that blend learning with fun. Join us to grow your skills and make an impact!</p>
+    </main>
+  </div>
+</div>
+
+<footer>
+  Contact us at mlsacbvp@outlook.in | 011-25278444
+</footer>
+
+<script>
+  const tabs = ['welcome', 'about', 'team', 'events', 'contact'];
+  const contentArea = document.getElementById('content-area');
+  const logoHTML = `<div class="welcome-logo-box">
+    <img src="https://mlsacbvp.vercel.app/aboutus/aboutus_assets/MLSCLogo.png" alt="MLSAC Logo" class="welcome-logo">
+  </div>`;
+  const contentData = {
+    welcome: `
+      ${logoHTML}
+      <h1>Welcome to MLSAC Society</h1>
+      <p>The Microsoft Learn Student Ambassadors' Chapter (MLSAC) is a vibrant community of tech enthusiasts dedicated to organizing sessions, workshops, and hackathons that blend learning with fun. Join us to grow your skills and make an impact!</p>
+    `,
+    about: `
+      <h1>About MLSAC</h1>
+      <p>We, MLSAC (Microsoft Learn Student Ambassadors' Chapter), are a community of tech enthusiasts. We conduct sessions, organize workshops & hackathons while encapsulating the fun part of learning.</p>
+      <p>Our vision is to cultivate young talent at BVCOE to compete at global competitions like Microsoft Imagine Cup and provide free learning experiences with Microsoft resources.</p>
+      <p>We aim to advance programming and development culture with networking opportunities and teamwork improvement.</p>
+    `,
+    team: `
+      <h1>Our Team</h1>
+      <p>Meet the passionate and driven students and coordinators who make MLSAC possible.</p>
+      <ul>
+        <li>John Doe - President</li>
+        <li>Jane Smith - Vice President</li>
+        <li>Alice Johnson - Lead Developer</li>
+        <li>Bob Lee - Event Coordinator</li>
+      </ul>
+    `,
+    events: `
+      <h1>Upcoming Events</h1>
+      <p>We regularly host technical sessions, coding workshops, and hackathons. Stay tuned for announcements and sign up for exciting opportunities to learn and compete.</p>
+    `,
+    contact: `
+      <h1>Contact Us</h1>
+      <p>You can reach us via email at <a href="mailto:mlsacbvp@outlook.in" style="color:#aad4ff;">mlsacbvp@outlook.in</a> or call us at <strong>011-25278444</strong>.</p>
+      <p>Visit us at A-4, Paschim Vihar, New Delhi 110063 (In front of Paschim Vihar East Metro Station).</p>
+    `
+  };
+
+  function switchTab(tab) {
+    if (!tabs.includes(tab)) return;
+    document.querySelectorAll('nav.sidebar ul li').forEach(el => {
+      el.classList.toggle('active', el.textContent.replace(/\s/g, '').toLowerCase() === tab);
+    });
+    tabs.forEach(t => {
+      document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+    });
+    contentArea.innerHTML = contentData[tab] || '<p>Content not found.</p>';
+  }
+</script>
+</body>
+</html>
